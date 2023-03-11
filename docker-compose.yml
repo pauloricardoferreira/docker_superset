@@ -1,0 +1,61 @@
+version: '3.5'
+
+x-superset-common:
+  &superset-common
+  environment:
+  - TZ=America/Recife
+  image: apache/superset:latest
+  volumes:
+    - ./pythonpath:/app/pythonpath
+    #como mapear a pasta de icones para o container
+    - ./static/assets/custom_images/:/app/superset/static/assets/custom_images/
+    - /etc/timezone:/etc/timezone:ro
+    - /etc/localtime:/etc/localtime:ro
+  networks:
+   - superset
+   - postgres-prd
+
+services:
+  superset_db_update:
+    <<: *superset-common
+    container_name: superset_db_update
+    command: superset db upgrade
+
+  superset_user_create:
+    <<: *superset-common
+    container_name: superset_user_create
+    command: 
+      - /bin/bash
+      - -c
+      - |
+          superset fab create-admin \
+              --username admin \
+              --firstname Superset \
+              --lastname Admin \
+              --email admin@superset.com \
+              --password admin
+    depends_on:
+      - superset_db_update
+
+  superset_init:
+    <<: *superset-common
+    container_name: superset_init
+    entrypoint: superset init
+    depends_on:
+      - superset_user_create
+
+  superset:
+    <<: *superset-common
+    container_name: superset
+    depends_on:
+      - superset_init  
+    ports:
+      - 8088:8088
+
+networks:
+  superset:
+    external: true
+    name: superset
+  postgres-prd:
+    external: true
+    name: postgres-prd
