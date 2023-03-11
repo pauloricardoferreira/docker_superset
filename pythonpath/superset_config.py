@@ -41,5 +41,5 @@ LANGUAGES = {
 }
 
 #exemplo de onde fica o arquivo
-APP_ICON = "/static/assets/custom_images/icon.svg"
-FAVICONS = [{"href": "/static/assets/custom_images/icon.svg"}]
+APP_ICON = "/static/assets/custom_images/icone.svg"
+FAVICONS = [{"href": "/static/assets/custom_images/icone.svg"}]
