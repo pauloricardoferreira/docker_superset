@@ -1,24 +1,11 @@
-Excluir a pasta node_modules do diretório superset-websocket assim que o container super pela primeira vez
+## Bem-vindo
 
-comando antes de iniciar
+Neste repositório, você vai encontrar uma configuração básica para iniciar o Apache Superset.
 
-criar as redes: superset e postgres-superset
-criar os volumes superset e postgres-superset
+Para que o projeto inicie corretamente é necessário alguns procedimentos:
 
-docker container exec -ti ID_DO_CONTAINER /bin/bash
+Criar duas redes Docker: postgres-superset e superset confome explicado no no repositório [Docker Postgres](https://github.com/pauloricardoferreira/docker_postgres)
 
-    command: 
-      - /bin/bash
-      - -c
-      - |
-          #atualizada o banco interno
-          superset db upgrade &
-          # cria usuário admin
-          superset fab create-admin \
-              --username admin \
-              --firstname Superset \
-              --lastname Admin \
-              --email admin@superset.com \
-              --password admin
-          #iniciar o superset
-          superset init
+Caso deseje criar volumes, fique a vontade para configura-los.
+
+Com estes repositórios você iniciar o Postgres e Apache Superset de forma básica, e para mais detalhes visite [Apache Sueprset](https://superset.apache.org/)
