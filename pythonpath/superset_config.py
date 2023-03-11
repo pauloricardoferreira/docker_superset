@@ -17,7 +17,7 @@ SECRET_KEY = 'supersersecret'
 # Note that the connection information to connect to the datasources
 # you want to explore are managed directly in the web UI
 #vSQLALCHEMY_DATABASE_URI = 'sqlite:////path/to/superset.db'
-SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://superset:superset@postgres-prd/superset"
+SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://superset:superset@postgres-superset/superset"
 
 # Flask-WTF flag for CSRF
 WTF_CSRF_ENABLED = True

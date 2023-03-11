@@ -2,18 +2,14 @@ version: '3.5'
 
 x-superset-common:
   &superset-common
-  environment:
-  - TZ=America/Recife
-  image: apache/superset:latest
+  image: apache/superset:2.0.1
   volumes:
     - ./pythonpath:/app/pythonpath
     #como mapear a pasta de icones para o container
     - ./static/assets/custom_images/:/app/superset/static/assets/custom_images/
-    - /etc/timezone:/etc/timezone:ro
-    - /etc/localtime:/etc/localtime:ro
   networks:
    - superset
-   - postgres-prd
+   - postgres-superset
 
 services:
   superset_db_update:
@@ -56,6 +52,6 @@ networks:
   superset:
     external: true
     name: superset
-  postgres-prd:
+  postgres-superset:
     external: true
-    name: postgres-prd
+    name: postgres-superset
